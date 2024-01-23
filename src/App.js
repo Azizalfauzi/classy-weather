@@ -1,7 +1,19 @@
-import "./App.css";
+import React from "react";
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 5 };
+  }
 
-function App() {
-  return <div>Hello World</div>;
+  render() {
+    return (
+      <div>
+        <button>-</button>
+        <span>{this.state.count}</span>
+        <button>+</button>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default Counter;

@@ -76,11 +76,13 @@ class App extends React.Component {
   // UseEffect []
   componentDidMount() {
     // this.fetchWeather();
+    this.setState({ location: localStorage.getItem("location") || "" });
   }
   // UseEffect [location]
   componentDidUpdate(prevProps, prevState) {
     if (this.state.location !== prevState.location) {
       this.fetchWeather();
+      localStorage.setItem("location", this.state.location);
     }
   }
 

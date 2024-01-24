@@ -65,12 +65,24 @@ class App extends React.Component {
       const weatherData = await weatherRes.json();
       this.setState({ weather: weatherData.daily });
     } catch (err) {
-      console.err(err);
+      console.log(err);
     } finally {
       this.setState({ isLoading: false });
     }
   };
   setLocation = (e) => this.setState({ location: e.target.value });
+
+  // UseEffect []
+  componentDidMount() {
+    this.fetchWeather();
+  }
+  // UseEffect [location]
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.location !== prevState.location) {
+      this.fetchWeather();
+    }
+  }
+
   render() {
     return (
       <div className="app">
@@ -112,7 +124,6 @@ class Input extends React.Component {
 
 class Weather extends React.Component {
   render() {
-    console.log(this.props.weather);
     const {
       temperature_2m_max: max,
       temperature_2m_min: min,

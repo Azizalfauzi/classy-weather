@@ -34,13 +34,14 @@ function formatDay(dateStr) {
 
 class App extends React.Component {
   state = {
-    location: "lisbon",
+    location: "",
     isLoading: false,
     displayLocation: "",
     weather: {},
   };
 
   fetchWeather = async () => {
+    if (this.state.location.length < 2) return;
     try {
       this.setState({ isLoading: true });
       // 1) Getting location (geocoding)
@@ -74,7 +75,7 @@ class App extends React.Component {
 
   // UseEffect []
   componentDidMount() {
-    this.fetchWeather();
+    // this.fetchWeather();
   }
   // UseEffect [location]
   componentDidUpdate(prevProps, prevState) {
@@ -91,7 +92,6 @@ class App extends React.Component {
           location={this.state.location}
           onChangeLocation={this.setLocation}
         />
-        <button onClick={this.fetchWeather}>Get Weather</button>
         {this.state.isLoading && <p className="loader">Loading....</p>}
 
         {this.state.weather.weathercode && (
